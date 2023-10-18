@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet"/>
+<script  src="bundle.js"></script>
+
+    <title>Mmmm ail 'exquise</title>
+</head>
+<body>
+    <div id ="header" class="container-fluid">
+
+        <div  class="input-group rounded ">
+            <input id="search" type="search" class="form-control rounded mt-4 col-9" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0 mt-4 col-1" id="search-addon" >
+              <i class="fas fa-search">search</i>
+            </span>
+          </div>
+    <div class="d-flex m-3">
+        <div class="dropdown m-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            choisissez votre Catégorie
+            </button>
+            <div id = "categories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            </div> 
+        
+        </div>
+
+        <div class="dropdown m-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            choisissez votre Pays
+            </button>
+            <div id = "pays" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            </div> 
+        
+        </div>
+    </div>
+ 
+
+    <script >
+let categories = document.getElementById('categories');
+let regions = document.getElementById('regions');
+
+    fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
+    .then ((response) => response.json())
+            .then(function(data) {
+                console.log(data)
+                for (let meal of data.meals){
+                    categories.innerHTML += `
+                    <a class="dropdown-item"  style="text-decoration:none;" href="#" onclick = "rechercheC('${meal.strCategory}')">${meal.strCategory}</a>
+                    `
+                }
+            })
+    .catch(function (error) {
+    console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
+  }); 
+
+    fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')   
+    .then ((response) => response.json())
+            .then(function(data) {
+                for (let meal of data.meals){
+                    pays.innerHTML +=`
+                    <a class="dropdown-item"  style="text-decoration:none;" href="#" onclick = "rechercheP('${meal.strArea}')">${meal.strArea}</a>
+                    `  
+                }
+            })
+    .catch(function (error) {
+    console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
+  });
+    function rechercheC(categorie){
+        const urlStart = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+        const url = `${urlStart}${categorie}`;
+        fetch(url)
+        .then ((response) => response.json())
+            .then(function(data) {
+                console.log(data)
+            })
+            .catch(function (error) {
+    console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
+  });
+   }
+
+   function rechercheP(pays){
+        const urlStart = "https://www.themealdb.com/api/json/v1/1/filter.php?a="
+        const url = `${urlStart}${pays}`;
+        fetch(url)
+        .then ((response) => response.json())
+            .then(function(data) {
+                console.log(data)
+            })
+            .catch(function (error) {
+    console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
+  });
+   }
+    </script>
+</body>
+</html>

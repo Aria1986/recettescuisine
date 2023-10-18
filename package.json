@@ -1,0 +1,28 @@
+{
+  "name": "sc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "dev": "webpack --watch --mode development",
+    "prod": "webpack --watch --mode production",
+    "compile:sass": "sass --watch scss:assets/css"
+  },
+  "author": "mailys",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "sass": "^1.58.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.3.0",
+    "autoprefixer": "^10.4.13",
+    "bootstrap": "^5.2.3",
+    "popper.js": "^1.16.1",
+    "postcss-cli": "^10.1.0"
+  },
+  "description": ""
+}
