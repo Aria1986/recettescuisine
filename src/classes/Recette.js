@@ -8,6 +8,7 @@ export class Recette{
     _strInstructions
     _strMealThumb
     _ingredients
+    _recette = []
 
         constructor(id, nom,  categorie, region, instructions, img, ingredients, mesures ){
             this._idMeal = id;
@@ -16,7 +17,10 @@ export class Recette{
             this._strArea = region;
             this._strInstructions = instructions;
             this._strMealThumb = img;
+            this._ingredient= ingredients;
+            this._mesures = mesures
             this._ingredients = new Ingredient(ingredients, mesures);
+            this._recette = [id, nom,  categorie, region, instructions, img, ingredients, mesures]
         }
 
     //getter & setters
@@ -47,7 +51,7 @@ export class Recette{
     get content() {
         const div = document.createElement("div");
         div.classList.add("recette");
-        const markup =
+        const markupR =
         `<h2>${this._nom}</h2>
         <span>${this._area}</span>
         <img src="${this._strMealThumb}"/>
@@ -56,7 +60,7 @@ export class Recette{
         <h3>Préparation</h3>
         <p>${this.__strInstructions}</p>`
 
-        div.innerHTML = markup;
+        div.innerHTML = markupR;
     return div;
     }
 
@@ -67,12 +71,13 @@ export class Recette{
         `<div class="card-body w-70% m-4">
             <h3 class="text-center">${this._nom}</h2>
             <img class="mt-4 img-thumbnail" src="${this._strMealThumb}" />
-            <button class="d-block m-auto mt-3">voir la recette </button>
+            <button  class="d-block m-auto mt-3" onclick="afficherRecette(${this._idMeal},${this._strCategory},${this._nom},${this._strArea},'${this._strInstructions}',${this._strMealThumb},${this._ingredient},${this._mesures})">voir la recette </button>
         </div>
-        
         `
         li.innerHTML = markup;
         return li;
     }
 
+    
 }
+// li.appendChild(${this.content})
