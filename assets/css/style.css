@@ -8,6 +8,13 @@
  a{
   text-decoration: none;
 }
+div.categories:hover{
+  cursor: pointer;
+}
+
+div.areas:hover{
+  cursor: pointer;
+}
 
 .class{
   border: solid;
@@ -268,7 +275,7 @@ sup {
 
 a {
   color: var(--bs-link-color);
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 a:hover {
   color: var(--bs-link-hover-color);

@@ -9,11 +9,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet"/>
 
-
     <title>Mmmm ail 'exquise</title>
 </head>
 <body>
-    <div id ="header" class="container-fluid">
+    <div id ="header" class="container-fluid ">
 
         <div  class="input-group rounded !col-5">
             <input id="search" type="search" class="form-control rounded mt-4 col-4" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -28,7 +27,7 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             choisissez votre Catégorie
             </button>
-            <div id = "categories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div id = "categoriesMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             </div> 
         
         </div>
@@ -37,12 +36,13 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             choisissez votre Pays
             </button>
-            <div id = "pays" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div id = "paysMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             </div> 
-        
         </div>
     </div>
-
+        <div id="recettes" class="d-flex justify-content-around flex-wrap m-5">
+        </div>
+    
 </body>
-<script defer src="bundle.js"></script>
+<script  src="bundle.js" defer></script>
 </html>

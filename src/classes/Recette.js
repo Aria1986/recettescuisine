@@ -1,4 +1,5 @@
 import { Ingredient } from "./Ingredient";
+
 export class Recette{
 
     _idMeal
@@ -8,9 +9,8 @@ export class Recette{
     _strInstructions
     _strMealThumb
     _ingredients
-    _recette = []
 
-        constructor(id, nom,  categorie, region, instructions, img, ingredients, mesures ){
+        constructor(id, nom, img,  categorie, region, instructions=0,  ingredients=0, mesures=0 ){
             this._idMeal = id;
             this._nom = nom;
             this._strCategory = categorie;
@@ -20,7 +20,6 @@ export class Recette{
             this._ingredient= ingredients;
             this._mesures = mesures
             this._ingredients = new Ingredient(ingredients, mesures);
-            this._recette = [id, nom,  categorie, region, instructions, img, ingredients, mesures]
         }
 
     //getter & setters
@@ -71,7 +70,7 @@ export class Recette{
         `<div class="card-body w-70% m-4">
             <h3 class="text-center">${this._nom}</h2>
             <img class="mt-4 img-thumbnail" src="${this._strMealThumb}" />
-            <button  class="d-block m-auto mt-3" onclick="afficherRecette(${this._idMeal},${this._strCategory},${this._nom},${this._strArea},'${this._strInstructions}',${this._strMealThumb},${this._ingredient},${this._mesures})">voir la recette </button>
+            <button  class="d-block m-auto mt-3" onclick="afficherRecette(${this._idMeal})">voir la recette </button>
         </div>
         `
         li.innerHTML = markup;
