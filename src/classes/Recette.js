@@ -10,7 +10,7 @@ export class Recette{
     _strMealThumb
     _ingredients
 
-        constructor(id, nom, img,  categorie, region, instructions=0,  ingredients=0, mesures=0 ){
+        constructor(id, nom, img,  categorie = null, region = null, instructions = null,  ingredients = null, mesures = null){
             this._idMeal = id;
             this._nom = nom;
             this._strCategory = categorie;

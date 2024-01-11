@@ -62,16 +62,17 @@ let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
 let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
 let recettes = document.getElementById('recettes');
 
+// afficher liste des catégories cherchées dans API
 fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
     .then ((response) => response.json())
             .then(function(data) {
-                console.log(data)
                 for (let meal of data.meals){
                     categoriesMenu.innerHTML += `
                     <a class="categories dropdown-item"  style="text-decoration:none;" href="#" >${meal.strCategory}</a>
                     `
                 }
-                var categories = document.getElementsByClassName('categories')
+                // chercher les recettes correspondant à l'élément cliqué dans la liste de catégorie
+                let categories = document.getElementsByClassName('categories')
                 for (var j = 0 ; j < categories.length; j++) {
                     categories[j].addEventListener("click", rechercheRecetteCategory)
                 }
@@ -81,6 +82,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
   }); 
 
+  // afficher liste des régionss cherchées dans API
     fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')   
     .then ((response) => response.json())
             // afficher dans le html la liste des régions
@@ -89,9 +91,9 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
                 paysMenu.innerHTML +=`
                     <div class="areas dropdown-item"  value=${meal.strArea}>${meal.strArea}</div>
                     `            
-                }       
-                let areas = document.getElementsByClassName('areas')  
+                }                        
                 // Chercher des recettes au clic de sélection de la région lorsque la liste a été crée
+                let areas = document.getElementsByClassName('areas')
                 for (var i = 0 ; i < areas.length; i++) {
                     areas[i].addEventListener("click", rechercheRecetteArea)
                 }
@@ -117,34 +119,52 @@ function rechercheRecetteArea(event){
         .then((response) => response.json())
         .then(function(data) {
             console.log(data)
-            let i=1;
-            let ingredients=[];
-            let mesures =[];       
+    //         let i=1;
+    //         let ingredients=[];
+    //         let mesures =[];   
+                recettes.innerHTML = "";
+                recettes.innerHTML = `<h3>recettes de ${area} </h3>`
                 for (let meal of data.meals){
-                    console.log(meal.strIngredient1)
                     const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;
-                    console.log(meal.strIngredient1)
-                    if(typeof(meal.strIngredient1 != undefined)){
-                        ingredients=[];
-                        mesures =[]; 
-                        while(meal['strIngredient'+i] != "" ){
+    //                 console.log(meal.strIngredient1)
+    //                 if(typeof(meal.strIngredient1 != undefined)){
+    //                     ingredients=[];
+    //                     mesures =[]; 
+    //                     while(meal['strIngredient'+i] != "" ){
                         
-                            ingredients.push (meal['strIngredient'+i]);
-                            mesures.push (meal['strMeasure' +i]);
-                            i++
-                        }   
-                    }     
-                    let recette = new Recette(idMeal, strMeal, strCategory, strArea, strInstructions,strMealThumb, ingredients, mesures );
-                    recettes.innerHTML = "";
+    //                         ingredients.push (meal['strIngredient'+i]);
+    //                         mesures.push (meal['strMeasure' +i]);
+    //                         i++
+    //                     }   
+    //                 }     
+                    let recette = new Recette(idMeal, strMeal, strMealThumb);                 
                     recettes.appendChild(recette.card);  
                 }
                 
-            
-        })
+        })  
+        // })
         .catch(function(error) {
             console.log(error);
           });
 }
 
+function rechercheRecetteEntiere(id){
+    let urlStart='www.themealdb.com/api/json/v1/1/lookup.php?i='
+    let url = `${urlStart}${id}`
+    fetch(url)
+        .then((response) => response.json())
+        .then (function(data){
+            console.log(data)
+        })
+}
 
 
+
+function rechercheRecetteCategory(event){
+    console.log('fonction recherche categorie en cours')
+    let categorySearch = event.target.getAttribute('value');
+    console.log(categorySearch)
+    .catch(function(error) {
+        console.log(error);
+      });
+}

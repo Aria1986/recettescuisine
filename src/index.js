@@ -13,17 +13,21 @@ valider.addEventListener("click", function(event){
   });
 
 // recherche et affichage de cartes de 6 recettes aléatoires
-for(let i=0; i<6; i++){
-    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-        .then ((response) => response.json())
-            .then(function(data) {
-                const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb} = data.meals[0];
- 
-                let recette = new Recette(idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb)
-                recettes.appendChild( recette.card)               
-            })   
-}
+window.addEventListener("load",afficherRecettesAleatoires)
 
+function afficherRecettesAleatoires() {
+    for(let i=0; i<6; i++){
+        fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+            .then ((response) => response.json())
+                .then(function(data) {
+                    // console.log('recette aleatoire:')
+                    // console.log(data)
+                    const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb} = data.meals[0];
+                    let recette = new Recette(idMeal, strMeal, strMealThumb, strCategory, strArea, strInstructions)
+                    recettes.appendChild( recette.card)               
+                })   
+    }
+}
 
 
 function rechercheRecette(event, urlStart, param){
@@ -46,7 +50,7 @@ function rechercheRecette(event, urlStart, param){
                     mesures.push (meal['strMeasure' +i]);
                     i++
                 }        
-                let recette = new Recette(idMeal, strMeal, strCategory, strArea, strInstructions,strMealThumb, ingredients, mesures );
+                let recette = new Recette(idMeal, strMeal,strMealThumb, strCategory, strArea, strInstructions, ingredients, mesures );
                 recettes.appendChild(recette.card);  
             }
         })
@@ -54,6 +58,7 @@ function rechercheRecette(event, urlStart, param){
 console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
 });
 }
+
 
 
 
