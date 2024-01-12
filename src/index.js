@@ -64,5 +64,8 @@ console.error('Il y a eu un problème avec l\'opération fetch : ' + error.messa
 
 
 
+
+
+
 //PAGE 2
 

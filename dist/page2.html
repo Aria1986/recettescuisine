@@ -12,6 +12,7 @@
     <title>Mmmm ail 'exquise</title>
 </head>
 <body>
+ 
     <div id ="header" class="container-fluid ">
 
         <div  class="input-group rounded !col-5">
@@ -25,7 +26,7 @@
     <div class="d-flex m-3">
         <div class="dropdown m-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            choisissez votre Catégorie
+            choose your category
             </button>
             <div id = "categoriesMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             </div> 
@@ -34,15 +35,30 @@
 
         <div class="dropdown m-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            choisissez votre Pays
+            choose your country
             </button>
             <div id = "paysMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             </div> 
         </div>
     </div>
+    <!-- <script>
+        function afficherRecetteEntiere(id){
+            recettes.innerHTML = "";
+            let urlStart='https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+            let url = `${urlStart}${id}`
+            fetch(url)
+                .then((response) => response.json())
+                .then (function(data){
+                    console.log(data)
+                    let i=1;
+                    let ingredients=[];
+                })                     
+        }
+    </script> -->
+    
         <div id="recettes" class="d-flex justify-content-around flex-wrap m-5">
         </div>
     
 </body>
-<script  src="bundle.js" defer></script>
+<script  src="bundle.js" defer ></script>
 </html>

@@ -62,6 +62,7 @@ let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
 let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
 let recettes = document.getElementById('recettes');
 
+
 // afficher liste des catégories cherchées dans API
 fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
     .then ((response) => response.json())
@@ -103,27 +104,17 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
     .catch(function (error) {
     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
   });
-
-
-   
-
-  
+ 
 
 function rechercheRecetteArea(event){
-    console.log('fonction recherche area en cours')
     let area = event.target.getAttribute('value');
-    console.log(area)
     let url = `${urlStartArea}${area}`
         fetch(url)
     
         .then((response) => response.json())
-        .then(function(data) {
-            console.log(data)
-    //         let i=1;
-    //         let ingredients=[];
-    //         let mesures =[];   
+        .then(function(data) { 
                 recettes.innerHTML = "";
-                recettes.innerHTML = `<h3>recettes de ${area} </h3>`
+                recettes.innerHTML = `<h3 class="w-100 text-center"> ${area} recipes </h3>`
                 for (let meal of data.meals){
                     const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;
     //                 console.log(meal.strIngredient1)
@@ -148,15 +139,7 @@ function rechercheRecetteArea(event){
           });
 }
 
-function rechercheRecetteEntiere(id){
-    let urlStart='www.themealdb.com/api/json/v1/1/lookup.php?i='
-    let url = `${urlStart}${id}`
-    fetch(url)
-        .then((response) => response.json())
-        .then (function(data){
-            console.log(data)
-        })
-}
+
 
 
 
@@ -168,3 +151,16 @@ function rechercheRecetteCategory(event){
         console.log(error);
       });
 }
+// function afficherRecetteEntiere(event){
+//     let id = event.target.getAttribute('value');
+//     recettes.innerHTML = "";
+//     let urlStart='https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+//     let url = `${urlStart}${id}`
+//     fetch(url)
+//         .then((response) => response.json())
+//         .then (function(data){
+//             console.log(data)
+//             let i=1;
+//             let ingredients=[];
+//         })           
+// }
