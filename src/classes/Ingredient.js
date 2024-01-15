@@ -29,13 +29,19 @@ export class Ingredient{
     get content(){
         const div = document.createElement("div");
         div.classList.add("ingredients");
-        const markup =`
-        <ul>
-        for( i=1; i= this._ingredients.length;i++){
-            <li>this._ingredients[i] this._mesures[i]</li>
+        let lengthIngredients = this._ingredients.length
+        let markupIngredients =`<h3>Ingrédients</h3>
+        <ul>`
+        for(let ind = 0; ind < lengthIngredients; ind++){
+            markupIngredients +=`
+            <li>${this._ingredients[ind]} ${this._mesures[ind]}</li>
+            `
+            div.innerHTML = markupIngredients
+            
         }
-        </ul>
-        ` 
-
+        // div.innerHTML=`</ul>`
+        console.log(markupIngredients)
+        console.log(div)
+        return div;
     }
 }

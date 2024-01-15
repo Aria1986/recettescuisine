@@ -1,4 +1,5 @@
 import { Recette } from "./classes/Recette";
+
 // let categories = document.getElementById('categories');
 // let pays = document.getElementById('pays');
 
