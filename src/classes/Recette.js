@@ -54,9 +54,9 @@ export class Recette{
         const div = document.createElement("div");
         div.classList.add("recette");
         const markupR =
-        `<h2 class="text-center m-3">${this._nom}</h2>
-        <h4>${this._area}</h4>
-        <img class="m-4" src="${this._strMealThumb}"/>
+        `<h2 class="text-center m-3 w-100">${this._nom}</h2>
+        <h4>nationality of the recipe: ${this._strArea}</h4>
+        <img class="img-thumbnail" src="${this._strMealThumb}"/>
         `
         div.innerHTML = markupR;
         
@@ -65,12 +65,15 @@ export class Recette{
     }
     get instructions(){
         const div = document.createElement("div");
+        div.classList.add("instructions");
+        div.classList.add("w-full");
         const markupInstruction =
         `
-         <h3>Préparation</h3>
-        <p>${this.__strInstructions}</p>
+         <h3>Instructions</h3>
+        <p>${this._strInstructions}</p>
         `
         div.innerHTML = markupInstruction;
+        return div
     }
 
     get card(){
@@ -79,8 +82,8 @@ export class Recette{
         const markup =
         `<div class="card-body w-70% m-4">
             <h3 class="text-center">${this._nom}</h2>
-            <img class="mt-4 img-thumbnail" src="${this._strMealThumb}" />
-            <button  class="buttonRecipe d-block m-auto mt-3" value=${this._idMeal} >voir la recette </button>
+            <img class="img-thumbnail" src="${this._strMealThumb}" />
+            <button  class="buttonRecipe d-block m-auto mt-3" value=${this._idMeal} >Show the recipe </button>
         </div>
         `
         li.innerHTML = markup;
@@ -94,6 +97,7 @@ export class Recette{
 
     afficherRecetteEntiere(event){
         let recettes = document.getElementById('recettes')
+        let divRecette = document.getElementById('recette')
         let id = event.target.getAttribute('value');
         recettes.innerHTML = "";
         let urlStart='https://www.themealdb.com/api/json/v1/1/lookup.php?i='
@@ -118,13 +122,11 @@ export class Recette{
                             i++
                         }   
                     }     
-                    console.log(idMeal, strMeal, strMealThumb, strCategory, strArea, strInstructions,ingredientsTab,mesuresTab)
                     let recette = new Recette(idMeal, strMeal, strMealThumb, strCategory, strArea, strInstructions);   
-                    let ingredients = new Ingredient(ingredientsTab,mesuresTab)  
-                    console.log(ingredients)            
-                    recettes.appendChild(recette.content); 
-                    recettes.appendChild(ingredients.content);  
-                    // recettes.appendChild(recette.instructions); 
+                    let ingredients = new Ingredient(ingredientsTab,mesuresTab)            
+                    divRecette.appendChild(recette.content); 
+                    divRecette.appendChild(ingredients.content);  
+                    divRecette.appendChild(recette.instructions); 
                 }
                 
         })  
