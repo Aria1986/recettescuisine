@@ -29,7 +29,6 @@ export class Ingredient{
     get content(){
         const div = document.createElement("div");
         div.classList.add("ingredients");
-        div.classList.add("mt-5");
         let lengthIngredients = this._ingredients.length
         let markupIngredients =`<h3>Ingredients</h3>
         <ul>`

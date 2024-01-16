@@ -54,9 +54,10 @@ export class Recette{
         const div = document.createElement("div");
         div.classList.add("recette");
         const markupR =
-        `<h2 class="text-center m-3 w-100">${this._nom}</h2>
-        <h4>nationality of the recipe: ${this._strArea}</h4>
-        <img class="img-thumbnail" src="${this._strMealThumb}"/>
+        `<h2 class="text-center m-5 w-100">${this._nom}</h2>
+        <br>
+        <h4><i>nationality of the recipe: ${this._strArea}</i></h4>
+        <img class="img-thumbnail m-auto" src="${this._strMealThumb}"/>
         `
         div.innerHTML = markupR;
         

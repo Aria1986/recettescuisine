@@ -61,8 +61,10 @@ let paysMenu = document.getElementById('paysMenu');
 
 let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
 let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
-let recettes = document.getElementById('recettes');
+let recettesDiv = document.getElementById('recettes');
+let recetteDiv = document.getElementById('recette');
 
+btnAccueil.addEventListener("click", function(){ recetteDiv.innerHTML = "";})
 
 // afficher liste des catégories cherchées dans API
 fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
@@ -114,8 +116,8 @@ function rechercheRecetteArea(event){
     
         .then((response) => response.json())
         .then(function(data) { 
-                recettes.innerHTML = "";
-                recettes.innerHTML = `<h3 class="w-100 text-center"> ${area} recipes </h3>`
+                recettesDiv.innerHTML = "";
+                recettesDiv.innerHTML = `<h3 class="w-100 text-center"> ${area} recipes </h3>`
                 for (let meal of data.meals){
                     const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;
     //                 console.log(meal.strIngredient1)
@@ -130,7 +132,7 @@ function rechercheRecetteArea(event){
     //                     }   
     //                 }     
                     let recette = new Recette(idMeal, strMeal, strMealThumb);                 
-                    recettes.appendChild(recette.card);  
+                    recettesDiv.appendChild(recette.card);  
                 }
                 
         })  
@@ -152,16 +154,3 @@ function rechercheRecetteCategory(event){
         console.log(error);
       });
 }
-// function afficherRecetteEntiere(event){
-//     let id = event.target.getAttribute('value');
-//     recettes.innerHTML = "";
-//     let urlStart='https://www.themealdb.com/api/json/v1/1/lookup.php?i='
-//     let url = `${urlStart}${id}`
-//     fetch(url)
-//         .then((response) => response.json())
-//         .then (function(data){
-//             console.log(data)
-//             let i=1;
-//             let ingredients=[];
-//         })           
-// }
