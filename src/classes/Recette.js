@@ -68,11 +68,15 @@ export class Recette{
         const div = document.createElement("div");
         div.classList.add("instructions");
         div.classList.add("w-full");
-        const markupInstruction =
-        `
-         <h3>Instructions</h3>
-        <p>${this._strInstructions}</p>
-        `
+        let markupInstruction =`<h3>Instructions</h3>`
+        // diviser et afficher chaque etape d'instruction
+        const etapes = this._strInstructions.split('STEP')
+        etapes.forEach(element => {                  
+            markupInstruction +=
+            `     
+            <p>${element}</p>
+            `
+        });
         div.innerHTML = markupInstruction;
         return div
     }

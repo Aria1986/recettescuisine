@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
  .recette{
-
   text-align: center;
  }
  .ingredients{
@@ -39,6 +38,8 @@ div.areas:hover{
 }
 #search-addon{
   width:50px;
+  height:34px
+
 }
  li{
   list-style:none;

@@ -1,59 +1,6 @@
 import { Recette } from "./classes/Recette";
 
-// let categories = document.getElementById('categories');
-// let pays = document.getElementById('pays');
 
-//     fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
-//     .then ((response) => response.json())
-//             .then(function(data) {
-//                 console.log(data)
-//                 for (let meal of data.meals){
-//                     categories.innerHTML += `
-//                     <a class="dropdown-item"  style="text-decoration:none;" href="#" onclick = "rechercheC('${meal.strCategory}')">${meal.strCategory}</a>
-//                     `
-//                 }
-//             })
-//     .catch(function (error) {
-//     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
-//   }); 
-
-//     fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')   
-//     .then ((response) => response.json())
-//             .then(function(data) {
-//                 for (let meal of data.meals){
-//                     pays.innerHTML +=`
-//                     <a class="dropdown-item"  style="text-decoration:none;" href="#" onclick = "rechercheP('${meal.strArea}')">${meal.strArea}</a>
-//                     `  
-//                 }
-//             })
-//     .catch(function (error) {
-//     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
-//   });
-//     function rechercheC(categorie){
-//         const urlStart = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
-//         const url = `${urlStart}${categorie}`;
-//         fetch(url)
-//         .then ((response) => response.json())
-//             .then(function(data) {
-//                 console.log(data)
-//             })
-//             .catch(function (error) {
-//     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
-//   });
-//    }
-
-//    function rechercheP(pays){
-//         const urlStart = "https://www.themealdb.com/api/json/v1/1/filter.php?a="
-//         const url = `${urlStart}${pays}`;
-//         fetch(url)
-//         .then ((response) => response.json())
-//             .then(function(data) {
-//                 console.log(data)
-//             })
-//             .catch(function (error) {
-//     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
-//   });
-//    }
 
 let categoriesMenu = document.getElementById('categoriesMenu');
 let paysMenu = document.getElementById('paysMenu');  
@@ -63,8 +10,6 @@ let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
 let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
 let recettesDiv = document.getElementById('recettes');
 let recetteDiv = document.getElementById('recette');
-
-btnAccueil.addEventListener("click", function(){ recetteDiv.innerHTML = "";})
 
 // afficher liste des catégories cherchées dans API
 fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
@@ -119,18 +64,7 @@ function rechercheRecetteArea(event){
                 recettesDiv.innerHTML = "";
                 recettesDiv.innerHTML = `<h3 class="w-100 text-center"> ${area} recipes </h3>`
                 for (let meal of data.meals){
-                    const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;
-    //                 console.log(meal.strIngredient1)
-    //                 if(typeof(meal.strIngredient1 != undefined)){
-    //                     ingredients=[];
-    //                     mesures =[]; 
-    //                     while(meal['strIngredient'+i] != "" ){
-                        
-    //                         ingredients.push (meal['strIngredient'+i]);
-    //                         mesures.push (meal['strMeasure' +i]);
-    //                         i++
-    //                     }   
-    //                 }     
+                    const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;    
                     let recette = new Recette(idMeal, strMeal, strMealThumb);                 
                     recettesDiv.appendChild(recette.card);  
                 }
