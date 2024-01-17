@@ -2,10 +2,6 @@ import { Recette } from "./classes/Recette";
 import { Ingredient } from "./classes/Ingredient";
 let urlStartSearch = 'https://www.themealdb.com/api/json/v1/1/search.php?s='
 let valider = document.getElementById('search-addon')
-let recettes = document.getElementById('recettes');
-
-let categories = document.getElementById('categories');
-let regions = document.getElementById('regions');
 
 valider.addEventListener("click", function(event){
     let param = document.getElementById('search').value
@@ -20,28 +16,30 @@ function afficherRecettesAleatoires() {
         fetch('https://www.themealdb.com/api/json/v1/1/random.php')
             .then ((response) => response.json())
                 .then(function(data) {
-                    // console.log('recette aleatoire:')
-                    // console.log(data)
                     const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb} = data.meals[0];
                     let recette = new Recette(idMeal, strMeal, strMealThumb, strCategory, strArea, strInstructions)
-                    recettes.appendChild( recette.card)               
+                    recettesDiv.appendChild( recette.card)               
                 })   
     }
 }
 
 
 function rechercheRecette(event, urlStart, param){
-    recettes.innerHTML = "";
+    console.log(param)
+    recetteDiv.innerHTML = "";
+    recettesDiv.innerHTML = "";
     event.preventDefault(); 
     const url = `${urlStart}${param}`;
     fetch(url)
     .then ((response) => response.json())
         .then(function(data) {
-        
-                let recette = new Recette(idMeal, strMeal,strMealThumb, strCategory, strArea, strInstructions);
-                recettes.appendChild(recette.card);  
+                recettesDiv.innerHTML = `<h3 class="w-100 text-center"> ${param} recipes </h3>`
+                for (let meal of data.meals){
+                     const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;    
+                    let recette = new Recette(idMeal, strMeal,strMealThumb, strCategory, strArea, strInstructions);
+                    recettesDiv.appendChild(recette.card);  
             }
-        )
+})
         .catch(function (error) {
 console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
 });
@@ -71,13 +69,17 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
             .then(function(data) {
                 for (let meal of data.meals){
                     categoriesMenu.innerHTML += `
-                    <a class="categories dropdown-item"  style="text-decoration:none;" href="#" >${meal.strCategory}</a>
+                    <div class="categories dropdown-item" value=${meal.strCategory}  >${meal.strCategory}</div>
                     `
                 }
                 // chercher les recettes correspondant à l'élément cliqué dans la liste de catégorie
                 let categories = document.getElementsByClassName('categories')
                 for (var j = 0 ; j < categories.length; j++) {
-                    categories[j].addEventListener("click", rechercheRecetteCategory)
+                    categories[j].addEventListener("click",  function(e){
+                        let category = e.target.getAttribute('value');
+                        console.log(e.target.getAttribute('value'));
+                        rechercheRecette(e,urlStartCategory,category);
+                    })
                 }
             })
             
@@ -98,7 +100,10 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
                 // Chercher des recettes au clic de sélection de la région lorsque la liste a été crée
                 let areas = document.getElementsByClassName('areas')
                 for (var i = 0 ; i < areas.length; i++) {
-                    areas[i].addEventListener("click", rechercheRecetteArea)
+                    areas[i].addEventListener("click", function(e){
+                        let area = e.target.getAttribute('value');
+                        rechercheRecette(e,urlStartArea,area)
+                    })
                 }
                          
             })
@@ -107,34 +112,3 @@ fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
     console.error('Il y a eu un problème avec l\'opération fetch : ' + error.message);
   });
  
-
-function rechercheRecetteArea(event){
-    let area = event.target.getAttribute('value');
-    let url = `${urlStartArea}${area}`
-        fetch(url)
-    
-        .then((response) => response.json())
-        .then(function(data) { 
-                recettesDiv.innerHTML = "";
-                recettesDiv.innerHTML = `<h3 class="w-100 text-center"> ${area} recipes </h3>`
-                for (let meal of data.meals){
-                    const{idMeal, strMeal, strCategory, strArea, strInstructions, strMealThumb,strIngredient1} = meal;    
-                    let recette = new Recette(idMeal, strMeal, strMealThumb);                 
-                    recettesDiv.appendChild(recette.card);  
-                }
-                
-        })  
-        .catch(function(error) {
-            console.log(error);
-          });
-}
-
-
-function rechercheRecetteCategory(event){
-    console.log('fonction recherche categorie en cours')
-    let categorySearch = event.target.getAttribute('value');
-    console.log(categorySearch)
-    .catch(function(error) {
-        console.log(error);
-      });
-}
