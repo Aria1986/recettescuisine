@@ -1,8 +1,18 @@
 import { Recette } from "./classes/Recette";
 import { Ingredient } from "./classes/Ingredient";
+// début d'urls appels API
 let urlStartSearch = 'https://www.themealdb.com/api/json/v1/1/search.php?s='
+let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
+let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
+// déclaration des variables correspondantes aux id nécessaires
 let valider = document.getElementById('search-addon')
+let categoriesMenu = document.getElementById('categoriesMenu');
+let paysMenu = document.getElementById('paysMenu');  
+let recettesDiv = document.getElementById('recettes');
+let recetteDiv = document.getElementById('recette');
+let btnAccueil = document.getElementById('btnAccueil')
 
+// recherche de recette par mot clé
 valider.addEventListener("click", function(event){
     let param = document.getElementById('search').value
     rechercheRecette(event,urlStartSearch, param);
@@ -45,21 +55,11 @@ console.error('Il y a eu un problème avec l\'opération fetch : ' + error.messa
 });
 }
 
-//PAGE 2
 
-let categoriesMenu = document.getElementById('categoriesMenu');
-let paysMenu = document.getElementById('paysMenu');  
-
-
-let urlStartArea = 'https://www.themealdb.com/api/json/v1/1/filter.php?a='
-let urlStartCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
-let recettesDiv = document.getElementById('recettes');
-let recetteDiv = document.getElementById('recette');
-let btnAccueil = document.getElementById('btnAccueil')
-
-// effacer recette afficher recettes aléatoires au clic du bouton
+// afficher recettes aléatoires au clic du bouton ( et effacer recette )
 btnAccueil.addEventListener("click", function(){ 
     recetteDiv.innerHTML = ""
+    recettesDiv.innerHTML = ""
     afficherRecettesAleatoires();})
 
 

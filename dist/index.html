@@ -18,14 +18,14 @@
    
         <div class="d-flex navbar justify-content-around">
         <!-- recherche par mot clef -->
-        <div class="mb-4">
-            <div class="input-group rounded col-5 d-flex mt-0">
-                <input id="search" type="search" class="form-control rounded mt-4 col-4" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span class="input-group-text border-0 mt-4 " id="search-addon" >
-                <i class="fas fa-search">search</i>
-                </span>
+            <div class="mb-4">
+                <div class="input-group rounded col-5 d-flex mt-0">
+                    <input id="search" type="search" class="form-control rounded mt-4 col-4" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text border-0 mt-4 " id="search-addon" >
+                    <i class="fas fa-search">search</i>
+                    </span>
+                </div>
             </div>
-        </div>
          <!-- recherche par categorie -->
             <div class="dropdown m-3">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,16 +43,20 @@
                 </div> 
             </div>
         </div>
-        <a id="btnAccueil" class="btn bg-primary">liste recettes aléatoires</a>
+    </div>
+
+    <span class="w-100 text-center d-block">
+        <button id="btnAccueil" class="btn bg-primary my-5">show 6 random recipes</button> 
+    </span>
+     <div id="recettes" class="d-flex justify-content-around flex-wrap m-5">
     </div>
     
-        <div id="recettes" class="d-flex justify-content-around flex-wrap m-5">
-        </div>
-        <div id="recette" class="d-flex flex-column justify-content-around flex-wrap col-8 m-auto">
+     <div id="recette" class="d-flex flex-column justify-content-around flex-wrap col-8 m-auto">      
+     </div>
         </div>
 
    <!-- footer -->
-   <div id="footer" class="align-items-center bg-secondary mt-2 ">
+   <div id="footer" class="align-items-center bg-secondary ">
        
     <div class="d-flex justify-around p-5">
       <img class="p-2" src = "../assets/images/facebook.svg">
